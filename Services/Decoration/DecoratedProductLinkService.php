@@ -52,7 +52,13 @@ class DecoratedProductLinkService implements ProductLinkServiceInterface
      */
     public function getList($products, Struct\ShopContextInterface $context)
     {
-        return $this->coreService->getList($products, $context);
+        $links = $this->coreService->getList($products, $context);
+
+        foreach ($links as $ordernumber => $linkArray) {
+            $links[$ordernumber] = $this->resourceFilter->filterLinks($linkArray, $context);
+        }
+
+        return $links;
     }
 
 }

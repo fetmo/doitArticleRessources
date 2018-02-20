@@ -4,7 +4,21 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--<services>-->
-    <!--</services>-->
+    <services>
+        <service class="doitArticleRessources\Services\Filter\ResourceFilter"
+                 id="doit_article_ressources.services.filter.resource_filter"/>
+        <service class="doitArticleRessources\Services\Decoration\DecoratedProductDownloadService"
+                 decorates="shopware_storefront.product_download_service" public="false"
+                 id="doit_article_ressources.services.decoration.decorated_product_download_service">
+            <argument id="doit_article_ressources.services.decoration.decorated_product_download_service.inner" type="service"/>
+            <argument id="doit_article_ressources.services.filter.resource_filter" type="service"/>
+        </service>
+        <service class="doitArticleRessources\Services\Decoration\DecoratedProductLinkService"
+                 decorates="shopware_storefront.product_link_service" public="false"
+                 id="doit_article_ressources.services.decoration.decorated_product_link_service">
+            <argument id="doit_article_ressources.services.decoration.decorated_product_link_service.inner" type="service"/>
+            <argument id="doit_article_ressources.services.filter.resource_filter" type="service"/>
+        </service>
+    </services>
 
 </container>

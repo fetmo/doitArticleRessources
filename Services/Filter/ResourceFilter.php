@@ -39,11 +39,11 @@ class ResourceFilter implements Filter
      */
     private function filter(array $items, $shopID)
     {
-        foreach ($items as $key => $item) {
+        foreach ($items as $index => $item) {
             $hide = $this->shouldHide($shopID, $item);
 
             if($hide){
-                unset($items[$key]);
+                unset($items[$index]);
             }
         }
 

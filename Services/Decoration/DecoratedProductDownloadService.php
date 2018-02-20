@@ -52,7 +52,13 @@ class DecoratedProductDownloadService implements ProductDownloadServiceInterface
      */
     public function getList($products, Struct\ShopContextInterface $context)
     {
-        return $this->coreService->getList($products, $context);
+        $downloads = $this->coreService->getList($products, $context);
+
+        foreach ($downloads as $ordernumber => $linkArray) {
+            $downloads[$ordernumber] = $this->resourceFilter->filterDownloads($linkArray, $context);
+        }
+
+        return $downloads;
     }
 
 }
