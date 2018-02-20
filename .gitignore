@@ -1,6 +1,7 @@
-.idea/
+.idea
+.idea/*
 
-vendor/
+vendor/*
 !vendor/.gitkeep
 
 composer.phar
